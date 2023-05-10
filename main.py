@@ -18,7 +18,7 @@ clear = lambda: os.system("cls" if os.name in ("nt", "dos") else "clear")
 os.system(f"title Keydrop Battle Bot - discord.gg/kws")
 
 class CaseBattle:
-    def __init__(self, token, sleep_interval=1, ticket_cost_threshold=1000):
+    def __init__(self, token, sleep_interval=1, ticket_cost_threshold=4):
         self.session = requests.Session()
         self.user_agent = UserAgent()
         self.session.headers.update({
@@ -60,15 +60,21 @@ class CaseBattle:
             url = f"{self.join_battle_url}{battle_id}/1"
             response = self.session.post(url)
             response.raise_for_status()
-            return json.loads(response.text)["success"], response.text
+            json = json.loads(response.text)
+            if json["success"]:
+                return True, response.text
+            if json["errorCode"] == "slotUnavailable":
+                return False, "Slot unavailable!"
+            if json["errorCode"] == "rateLimited":
+                return False, "Ratelimited!"
+            return False, json["errorCode"]
         except requests.HTTPError as http_err:
             if "Unauthorized" in str(response.text):
-                logging.error("Invalid token!")
                 return False, "Invalid token!"
-            logging.error(f"HTTP error occurred: {http_err}")
+            logging.error(f"HTTP Error: {http_err}")
             return False, str(http_err)
         except Exception as err:
-            logging.error(f"Other error occurred: {err}")
+            logging.error(f"Error: {err}")
             return False, str(err)
 
     def monitor_battles(self):
@@ -78,15 +84,18 @@ class CaseBattle:
             battles = self.get_active_battles()
             for battle in battles:
                 if self.is_joinable(battle):
+                    logging.info(f"Trying to join battle {battle['id']}...")
                     success, message = self.join_battle(battle["id"])
-                    print(message)
                     if success:
                         logging.info(f"Successfully joined battle!")
                     elif message == "Invalid token!":
                         logging.error("Invalid bearer token!")
                         exit()
+                    elif message == "Ratelimited!":
+                        logging.error("Ratelimited! Consider increasing the sleep interval.")
+                        sleep(60)
                     else:
-                        logging.error(f"Failed to join battle!")
+                        logging.error(f"Failed to join battle! Error: {message}")
                         sleep(self.sleep_interval)
             sleep(self.sleep_interval)
 
