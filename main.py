@@ -62,6 +62,7 @@ class CaseBattle:
             return False, str(err)
 
     def monitor_battles(self):
+        self.print_logo()
         while True:
             battles = self.get_active_battles()
             for battle in battles:
@@ -92,6 +93,6 @@ class CaseBattle:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    token = "YOUR_TOKEN_HERE"
+    token = "1683735220141"
     cb = CaseBattle(token)
     cb.monitor_battles()
