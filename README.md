@@ -24,7 +24,12 @@ This bot is designed to monitor and join available battles on the [Key-Drop](htt
    - You should see something like `token?t=12345`. This is your token.
 
 5. Replace `"your_token_here"` in the main script with your actual token.
-6. Run the script: `python main.py`
+6. Adjust the ticket cost threshold.
+7. Run the script: `python main.py`
+
+# To-Do
+
+- Proxy support
 
 ## Configuration
 
