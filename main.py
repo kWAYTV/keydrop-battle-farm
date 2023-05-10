@@ -79,7 +79,6 @@ class CaseBattle:
                         sleep(self.sleep_interval)
             sleep(self.sleep_interval)
 
-    @staticmethod
     def is_joinable(self, battle):
         isFreeBattle = battle["isFreeBattle"]
         users = battle["users"]
