@@ -74,7 +74,7 @@ class CaseBattle:
                         logging.info(f"Successfully joined to {battle['name']}!")
                     elif message == "Invalid token!":
                         logging.error("Invalid bearer token!")
-                        break
+                        exit()
                     else:
                         logging.error(f"Failed to join to {battle['name']}!")
                         sleep(self.sleep_interval)
