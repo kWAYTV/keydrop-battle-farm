@@ -22,7 +22,7 @@ This bot is designed to monitor and join available battles on the [Key-Drop](htt
    - Search for "token" in the network tab
    - If you can't find it, refresh the page once
    - You should see something like `token?t=12345`. This is your token.
-  
+
 5. Replace `"your_token_here"` in the main script with your actual token.
 6. Run the script: `python main.py`
 
@@ -43,6 +43,14 @@ Example:
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Disclaimer
+
+This project is intended for educational purposes only and is not recommended for use. I am not responsible for any misuse or any issues arising from this project. This includes, but is not limited to, account suspensions/bans or legal issues.
+
+The user assumes all risks. Using this script on platforms without explicit permission may violate terms of service. It is the user's responsibility to use this script responsibly.
+
+Please respect all applicable laws and terms of service when using this project.
 
 ## License
 
