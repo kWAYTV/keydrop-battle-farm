@@ -92,6 +92,6 @@ class CaseBattle:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    token = "1683735220141"
+    token = "YOUR_BEARER_TOKEN_HERE"
     cb = CaseBattle(token)
     cb.monitor_battles()
