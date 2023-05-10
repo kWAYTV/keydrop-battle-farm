@@ -52,6 +52,9 @@ class CaseBattle:
             response.raise_for_status()
             return json.loads(response.text)["success"], response.text
         except requests.HTTPError as http_err:
+            if "Unauthorized" in str(response.text):
+                logging.error("Invalid token!")
+                return False, "Invalid token!"
             logging.error(f"HTTP error occurred: {http_err}")
             return False, str(http_err)
         except Exception as err:
@@ -64,8 +67,12 @@ class CaseBattle:
             for battle in battles:
                 if self.is_joinable(battle):
                     success, message = self.join_battle(battle["id"])
+                    print(message)
                     if success:
                         logging.info(f"Successfully joined to {battle['name']}!")
+                    elif message == "Invalid token!":
+                        logging.error("Invalid bearer token!")
+                        break
                     else:
                         logging.error(f"Failed to join to {battle['name']}!")
                         sleep(self.sleep_interval)
