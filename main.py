@@ -1,7 +1,20 @@
-import json
-import requests
+import json, os, requests, logging
 from time import sleep
-import logging
+from pystyle import Colors, Colorate, Center
+
+logo = """
+██╗  ██╗███████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗ 
+██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
+█████╔╝ █████╗   ╚████╔╝ ██║  ██║██████╔╝██║   ██║██████╔╝
+██╔═██╗ ██╔══╝    ╚██╔╝  ██║  ██║██╔══██╗██║   ██║██╔═══╝ 
+██║  ██╗███████╗   ██║   ██████╔╝██║  ██║╚██████╔╝██║     
+╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝"""
+
+# Clear the console.
+clear = lambda: os.system("cls" if os.name in ("nt", "dos") else "clear")
+
+# Set the console title.
+os.system(f"title Vinted View Bot - discord.gg/kws")
 
 class CaseBattle:
     def __init__(self, token, sleep_interval=1, ticket_cost_threshold=1000):
@@ -14,6 +27,11 @@ class CaseBattle:
         self.join_battle_url = f"{self.base_url}joinCaseBattle/"
         self.sleep_interval = sleep_interval
         self.ticket_cost_threshold = ticket_cost_threshold
+
+    def print_logo(self):
+        print(Center.XCenter(Colorate.Vertical(Colors.white_to_blue, logo, 1)))
+        print(Center.XCenter(Colorate.Vertical(Colors.white_to_blue, "────────────────────────────────────────────\n", 1)))
+        print(Center.XCenter(Colorate.Vertical(Colors.white_to_blue, "Starting...", 1)))
 
     def get_active_battles(self):
         try:
@@ -66,6 +84,6 @@ class CaseBattle:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    token = "your_token_here"
+    token = "YOUR_TOKEN_HERE"
     cb = CaseBattle(token)
     cb.monitor_battles()
