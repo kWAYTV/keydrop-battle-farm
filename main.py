@@ -62,6 +62,7 @@ class CaseBattle:
             return False, str(err)
 
     def monitor_battles(self):
+        clear()
         self.print_logo()
         while True:
             battles = self.get_active_battles()
