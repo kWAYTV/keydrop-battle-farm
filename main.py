@@ -14,7 +14,7 @@ logo = """
 clear = lambda: os.system("cls" if os.name in ("nt", "dos") else "clear")
 
 # Set the console title.
-os.system(f"title Vinted View Bot - discord.gg/kws")
+os.system(f"title Keydrop Battle Bot - discord.gg/kws")
 
 class CaseBattle:
     def __init__(self, token, sleep_interval=1, ticket_cost_threshold=1000):
@@ -78,6 +78,7 @@ class CaseBattle:
                         sleep(self.sleep_interval)
             sleep(self.sleep_interval)
 
+    @staticmethod
     def is_joinable(self, battle):
         isFreeBattle = battle["isFreeBattle"]
         users = battle["users"]
