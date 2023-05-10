@@ -21,7 +21,7 @@ This bot is designed to monitor and join available battles on the [Key-Drop](htt
    - Inspect the website in the network tab (right-click on the page, select "Inspect" or "Inspect Element", then go to the "Network" tab)
    - Search for "token" in the network tab
    - If you can't find it, refresh the page once
-   - You should see something like `token?t=12345`. This is your token.
+   - You should see a request like `token?t=12345`. Your token is in here.
 
 5. Replace `"your_token_here"` in the main script with your actual token.
 6. Adjust the ticket cost threshold.
