@@ -33,11 +33,12 @@ This bot is designed to monitor and join available battles on the [Key-Drop](htt
 
 ## Configuration
 
-The `CaseBattle` class can be initialized with the following optional parameters:
+The `CaseBattle` class can be initialized with the following optional parameters from the config file:
 
 - `token` (str): Your Key-Drop token for API requests. **(Required)**
 - `sleep_interval` (int): The number of seconds the bot should sleep between checking battles. Default is 1.
 - `ticket_cost_threshold` (int): The maximum ticket cost that the bot should consider for free battles. Default is 1000.
+- `ratelimit_sleep` (int): The time it will sleep after being ratelimited. Default is 30
 
 Example:
 
