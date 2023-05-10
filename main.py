@@ -1,5 +1,6 @@
 import json, os, requests, logging
 from time import sleep
+from fake_useragent import UserAgent
 from pystyle import Colors, Colorate, Center
 
 logo = """
@@ -19,8 +20,17 @@ os.system(f"title Keydrop Battle Bot - discord.gg/kws")
 class CaseBattle:
     def __init__(self, token, sleep_interval=1, ticket_cost_threshold=1000):
         self.session = requests.Session()
+        self.user_agent = UserAgent()
         self.session.headers.update({
-            "authorization": f"Bearer {token}"
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Connection": "keep-alive",
+            "Host": "kdrp2.com",
+            "Origin": "https://key-drop.com",
+            "Referer": "https://key-drop.com/",
+            "authorization": f"Bearer {token}",
+            "User-Agent": self.user_agent.random
         })
         self.base_url = "https://kdrp2.com/CaseBattle/"
         self.active_battles_url = f"{self.base_url}battle?type=active&page=0&priceFrom=0&priceTo=0.29&searchText=&sort=priceAscending&players=all&roundsCount=all"
@@ -93,6 +103,6 @@ class CaseBattle:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    token = "YOUR_BEARER_TOKEN_HERE"
+    token = "YOUR_TOKEN_HERE"
     cb = CaseBattle(token)
     cb.monitor_battles()
